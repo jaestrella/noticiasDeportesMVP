@@ -11,6 +11,11 @@ import java.util.List;
 public interface NoticiasContract {
 
     interface View{
-        public void showNoticias(List<Noticia> lista);
+       void showNoticias(List<Noticia> lista);
+    }
+
+    interface Presenter{
+        void cargaDatos();
+        Noticia getNoticia(int position);
     }
 }

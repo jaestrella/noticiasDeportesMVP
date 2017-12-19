@@ -5,7 +5,7 @@ import com.iesvirgendelcarmen.dam.noticiasdeportesmvp.modelos.api.NewsApi;
 
 import java.util.List;
 
-public class NoticiasPresenter {
+public class NoticiasPresenter implements NoticiasContract.Presenter {
     private NoticiasContract.View vista;
     private List<Noticia> listaNoticias;
 
@@ -18,7 +18,7 @@ public class NoticiasPresenter {
      * <p>
      * Se usa un callback para recibir la lista.
      */
-    void cargaDatos() {
+    public void cargaDatos() {
         NewsApi api = new NewsApi();
         api.ultimasNoticias(new NewsApi.Callback() {
             @Override

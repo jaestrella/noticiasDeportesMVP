@@ -21,7 +21,8 @@ import butterknife.ButterKnife;
 public class NoticiasActivity extends AppCompatActivity implements NoticiasContract.View{
 
     public static final String EXTRA_NOTICIA = "EXTRA_NOTICIA";
-    private static NoticiasPresenter noticiasPresenter;
+    private NoticiasContract.Presenter noticiasPresenter;
+    private NoticiasAdapter noticiasAdapter;
 
     @BindView(R.id.noticias)
     ListView listViewNoticias;
@@ -29,17 +30,14 @@ public class NoticiasActivity extends AppCompatActivity implements NoticiasContr
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
-
-    private NoticiasAdapter noticiasAdapter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        noticiasAdapter=new NoticiasAdapter(this, new ArrayList<Noticia>(0));
-        listViewNoticias.setAdapter(noticiasAdapter);
+        /*noticiasAdapter=new NoticiasAdapter(this, new ArrayList<Noticia>(0));
+        listViewNoticias.setAdapter(noticiasAdapter);*/
 
         noticiasPresenter=new NoticiasPresenter(this);
         noticiasPresenter.cargaDatos();
@@ -58,6 +56,7 @@ public class NoticiasActivity extends AppCompatActivity implements NoticiasContr
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //Se lanza la Activity de detalles de la noticia
+
                 Intent intent = new Intent(NoticiasActivity.this, NoticiasDetalleActivity.class);
                 intent.putExtra(EXTRA_NOTICIA, noticiasPresenter.getNoticia(i));
                 startActivity(intent);
